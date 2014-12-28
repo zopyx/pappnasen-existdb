@@ -1,17 +1,18 @@
-# Pull base image.
-FROM dockerfile/java:oracle-java7
+FROM xmlio/jdk7-oracle
+MAINTAINER Andreas Jung <info@zopyx.com>
 
-# Define commonly used JAVA_HOME variable
-#ENV JAVA_HOME /usr/lib/jvm/java-8-oracle
+RUN apt-get update
+RUN apt-get install -y curl expect
 
-RUN useradd -ms /bin/bash exist
+WORKDIR /tmp
+RUN curl -LO http://downloads.sourceforge.net/exist/Stable/2.2/eXist-db-setup-2.2.jar
+ADD exist-setup.cmd /tmp/exist-setup.cmd
+RUN expect -f exist-setup.cmd
+RUN rm eXist-db-setup-2.2.jar exist-setup.cmd
 
-ENV HOME /home/exist
-USER exist
-WORKDIR /home/exist
 
+EXPOSE 8080 8443
+ENV EXIST_HOME /opt/exist
+WORKDIR /opt/exist
+CMD bin/startup.sh
 
-RUN wget -O basex.zip http://files.basex.org/releases/latest/BaseX80-20141225.174535.zip
-RUN unzip basex.zip
-EXPOSE 1984 8984
-CMD basex/bin/basexhttp
