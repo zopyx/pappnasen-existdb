@@ -2,7 +2,7 @@ FROM xmlio/jdk7-oracle
 MAINTAINER Andreas Jung <info@zopyx.com>
 
 RUN apt-get update
-RUN apt-get install -y curl expect
+RUN apt-get install -y curl expect cadaver
 
 WORKDIR /tmp
 RUN curl -LO http://downloads.sourceforge.net/exist/Stable/2.2/eXist-db-setup-2.2.jar
@@ -14,5 +14,5 @@ RUN rm eXist-db-setup-2.2.jar exist-setup.cmd
 EXPOSE 8080 8443
 ENV EXIST_HOME /opt/exist
 WORKDIR /opt/exist
-CMD bin/startup.sh
+CMD tools/wrapper/bin/existdb.sh console
 
