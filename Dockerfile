@@ -1,4 +1,4 @@
-FROM java:8 
+FROM java:latest 
 MAINTAINER Andreas Jung <info@zopyx.com>
 
 RUN apt-get update
@@ -13,5 +13,5 @@ RUN rm eXist-db-setup-2.2.jar exist-setup.cmd
 EXPOSE 8080 8443
 ENV EXIST_HOME /opt/exist
 WORKDIR /opt/exist
-CMD tools/wrapper/bin/existdb.sh console
+CMD tools/wrapper/bin/exist.sh console
 
