@@ -1,4 +1,4 @@
-spawn java -jar eXist-db-setup-3.0.RC1.jar -console
+spawn java -jar eXist-db-setup-3.0.RC2.jar -console
 expect "Select target" { send "/home/plone/exist\n" }
 expect "press 1" { send "1\n" }
 expect "Data dir" { send "/home/plone/exist-datat\n" }
